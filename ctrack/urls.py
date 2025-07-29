@@ -20,5 +20,6 @@ from job_tracker import urls as job_tracker_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('summernote/', include('django_summernote.urls')),
     path('', include(job_tracker_urls), name="job_tracker_urls")
 ]
