@@ -5,4 +5,4 @@ from .models import About
 # Create your views here.
 
 def about_us(request):
-    return HttpResponse("This is the About Us page")
+    return HttpResponse("This is the About Us/Home page")
