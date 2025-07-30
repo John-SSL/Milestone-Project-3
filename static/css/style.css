@@ -1,0 +1,12 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* CSS Variables */
+:root {
+    --primary-font:"Roboto", sans-sefir;
+    --secondary-font:"Nunito", sans-sefir;
+    --primary-color:#1F7A8C; /* turquoise */
+    --secondary-color:#022B3A; /* dark turquoise */
+    --highlight-color:#BFDBF7; /* light blue */
+    --highlight-color-light:#E1E5F2; /* light grey */
+}
