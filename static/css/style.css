@@ -32,3 +32,16 @@ h3 {
 footer { 
     background-color: var(--secondary-color);
 }
+
+/* Buttons */
+
+.custom-button-primary {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+}
+
+.custom-button-primary:hover {
+    background-color: var(--highlight-color-light);
+    color: var(--primary-color);
+}
