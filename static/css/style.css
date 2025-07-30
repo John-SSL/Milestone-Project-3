@@ -10,3 +10,25 @@
     --highlight-color:#BFDBF7; /* light blue */
     --highlight-color-light:#E1E5F2; /* light grey */
 }
+
+/* Global Styles */
+body {
+    background-color: white;
+    font-family: var(--primary-font);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--secondary-font);
+}
+
+/* Navigation Bar */
+#navbar {
+    background-color: var(--secondary-color);
+}
+
+/* Footer */
+footer { 
+    background-color: var(--secondary-color);
+}
