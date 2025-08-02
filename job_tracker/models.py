@@ -24,3 +24,11 @@ class Absence(models.Model):
 
     def __str__(self):
         return f"{self.user} absent for {self.duration} hours on {self.date}"
+
+
+class ProfileTarget(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    daily_target = models.DecimalField(max_digits=3, decimal_places=2, default=4.25)
+
+    def __str__(self):
+        return f"Engineer:{self.user}, Target:{self.daily_target}"
