@@ -1,7 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-    
+<!-- Productivity Table -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Target</th>
+                        <th scope="col">Delivered</th>
+                    </tr>
+                </thead>
+                {% for metric in weekly_data %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ metric.date }}</th>
+                        <td>{{ metric.target }}</td>
+                        <td>{{ metric.credits }}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </div>
+
+<!-- Completed Job form -->
 {% endblock content %}
