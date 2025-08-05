@@ -1,6 +1,8 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.db.models import Sum
 from datetime import date, timedelta
+from .forms import CompletedJobForm
 from .models import CompletedJob, Absence
 
 # Create your views here.
@@ -41,19 +43,22 @@ def job_tracker(request):
             "date": current_day,
             "target": adjusted_targets[current_day],
             "credits": credits_by_day[current_day]
-        }) 
+        })
     
+    # Create a form for submitting completed jobs
+    if request.method == "POST":
+        job_form = CompletedJobForm(request.POST)
+        if job_form.is_valid():
+            form = job_form.save(commit=False)
+            form.user = user
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'New job submitted')
+            return redirect('tracker')
+
+    job_form = CompletedJobForm()
     return render(
         request,
         "job_tracker/job-tracker.html",
         {"weekly_data": weekly_data,
+         "job_form": job_form,
          })
-
-    
-    # jobs = get_object_or_404(queryset, pk = 2 )
-    # user = request.user
-    # today = date.today()
-    # start_of_week = today - timedelta(days=today.weekday())
-    # end_of_week = start_of_week + timedelta(days=6)
-    # queryset = CompletedJob.objects.filter(user = user, completed_on__range = (start_of_week, end_of_week))
-    # print(f"Printing completed jobs:{queryset}")
