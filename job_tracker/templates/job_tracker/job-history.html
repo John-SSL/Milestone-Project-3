@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!-- Job History -->
+<div class="container text-center mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1> Completed Jobs</h1>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Job Type</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in completedjob_list %}
+                <tr>
+                    <th scope="row"> {{ job.completed_on }} </th>
+                    <td> {{ job.job_type }} </td>
+                    <td><button type="submit" class="btn btn-warning">Edit</button></td>
+                    <td><button type="submit" class="btn btn-danger">Delete</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

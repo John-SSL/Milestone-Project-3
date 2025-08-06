@@ -16,6 +16,10 @@ class CompletedJob(models.Model):
     job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
     completed_on = models.DateField()
 
+    class Meta:
+        ordering = ["-completed_on"]
+
+
     def __str__(self):
         return f"{self.job_type.credits} credits"
 
