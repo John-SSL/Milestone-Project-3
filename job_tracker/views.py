@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.db.models import Sum
 from django.views import generic
@@ -69,5 +69,28 @@ class CompletedJobList(generic.ListView):
     model = CompletedJob
     template_name = "job_tracker/job-history.html"
     paginate_by = 7
-    def get_queryset(self):
-        return CompletedJob.objects.filter(user = self.request.user)
+
+    def get(self, request, *args, **kwargs):
+        self.job_id = kwargs.get("job_id")
+        return super().get(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['job_form'] = CompletedJobForm()
+        return context
+
+
+def job_edit(request, pk):
+    if request.method == "POST":
+        job = get_object_or_404(CompletedJob, pk=pk)
+        job_form = CompletedJobForm(data=request.POST, instance=job)
+        if job_form.is_valid():
+            form = job_form.save(commit=False)
+            form.user = request.user
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Job Updated')
+            return redirect('job-history')
+        
+        else:
+            messages.add_message(request, messages.ERROR, 'Error updatng job')
+    return redirect('job-history')

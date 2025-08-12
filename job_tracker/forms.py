@@ -6,5 +6,3 @@ class CompletedJobForm(forms.ModelForm):
         model = CompletedJob
         fields = ('job_type', 'completed_on')
         widgets = {'completed_on': forms.DateInput(attrs={'type': 'date'}),}
-
-
