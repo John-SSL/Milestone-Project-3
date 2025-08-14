@@ -98,7 +98,7 @@ def job_edit(request, pk):
 
 def job_delete(request, pk):
     job = get_object_or_404(CompletedJob, pk=pk)
-    if job.user == request. user:
+    if job.user == request.user:
         job.delete()
         messages.add_message(request, messages.SUCCESS, 'Job Deleted')
     else:
@@ -133,4 +133,19 @@ def absence_post(request):
         else:
             messages.add_message(request, messages.ERROR, 'Error sumbitting absence')
 
+    return redirect('absences')
+
+
+def absence_edit(request, pk):
+    if request.method == "POST":
+        absence = get_object_or_404(Absence, pk=pk)
+        absence_form = AbsenceForm(data=request.POST, instance=absence)
+        if absence_form.is_valid():
+            form = absence_form.save(commit=False)
+            form.user = request.user
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Absence Updated')
+        else:
+            messages.add_message(request, messages.ERROR, 'Error updating absence')
+    
     return redirect('absences')

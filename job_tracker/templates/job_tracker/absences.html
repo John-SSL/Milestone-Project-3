@@ -28,8 +28,8 @@
                 <tr>
                     <th scope="row"> {{ absence.date }} </th>
                     <td> {{ absence.duration }} </td>
-                    <td><button data-absence_id="{{ absence.id }}" class="btn btn-warning btn-edit">Edit</button></td>
-                    <td><button data-absence_id="{{ absence.id }}" class="btn btn-danger btn-delete">Delete</button></td>
+                    <td><button data-absence_id="{{ absence.id }}" class="btn btn-warning btn-absence-edit">Edit</button></td>
+                    <td><button data-absence_id="{{ absence.id }}" class="btn btn-danger btn-absence-delete">Delete</button></td>
                 </tr>
                 {% endif %}
                 {% endfor %}
@@ -62,6 +62,29 @@
                 {{ absence_form | crispy }}
                 <button id="absencePostButton" type="submit" class="btn custom-button-primary">Submit</button>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- Absence Edit Modal -->
+<div class="modal fade" id="absenceEditModal" tabindex="-1" aria-labelledby="absenceEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Absence</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="absenceEditForm" method="post">
+                    {% csrf_token %}
+                    {{ absence_form | crispy }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="absenceEditButton" type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>
