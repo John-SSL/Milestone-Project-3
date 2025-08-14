@@ -23,12 +23,14 @@
             </thead>
             <tbody>
                 {% for job in completedjob_list %}
+                {% if user.is_authenticated and job.user == user %}
                 <tr>
                     <th scope="row"> {{ job.completed_on }} </th>
                     <td> {{ job.job_type }} </td>
                     <td><button data-job_id="{{ job.id }}" class="btn btn-warning btn-edit">Edit</button></td>
                     <td><button data-job_id="{{ job.id }}" class="btn btn-danger btn-delete">Delete</button></td>
                 </tr>
+                {% endif %}
                 {% endfor %}
             </tbody>
         </table>

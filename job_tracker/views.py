@@ -70,6 +70,9 @@ class CompletedJobList(generic.ListView):
     template_name = "job_tracker/job-history.html"
     paginate_by = 7
 
+    def get_queryset(self):
+        return CompletedJob.objects.filter(user=self.request.user)
+
     def get(self, request, *args, **kwargs):
         self.job_id = kwargs.get("job_id")
         return super().get(request, *args, **kwargs)
@@ -111,6 +114,9 @@ class AbsencesList(generic.ListView):
     model = Absence
     template_name = "job_tracker/absences.html"
     paginate_by = 7
+
+    def get_queryset(self):
+        return Absence.objects.filter(user=self.request.user)
 
     def get(self, request, *args, **kwargs):
         self.absence_id = kwargs.get("absence_id")
