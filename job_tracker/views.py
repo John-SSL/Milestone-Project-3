@@ -94,3 +94,14 @@ def job_edit(request, pk):
         else:
             messages.add_message(request, messages.ERROR, 'Error updatng job')
     return redirect('job-history')
+
+
+def job_delete(request, pk):
+    job = get_object_or_404(CompletedJob, pk=pk)
+    if job.user == request. user:
+        job.delete()
+        messages.add_message(request, messages.SUCCESS, 'Job Deleted')
+    else:
+        messages.add_message(request, messages.ERROR, "Error deleting job")
+    
+    return redirect('job-history')
