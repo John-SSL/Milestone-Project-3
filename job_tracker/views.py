@@ -149,3 +149,14 @@ def absence_edit(request, pk):
             messages.add_message(request, messages.ERROR, 'Error updating absence')
     
     return redirect('absences')
+
+
+def absence_delete(request, pk):
+    absence = get_object_or_404(Absence, pk = pk)
+    if absence.user == request.user:
+        absence.delete()
+        messages.add_message(request, messages.SUCCESS, 'Absence deleted')
+    else:
+        messages.add_message(request, messages.ERROR, 'Error deleting absence')
+    
+    return redirect('absences')
