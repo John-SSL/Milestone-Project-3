@@ -3,6 +3,7 @@
 {% url 'index' as index_url %}
 {% url 'tracker' as tracker_url %}
 {% url 'job-history' as history_url %}
+{% url 'absences' as absences_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
@@ -46,6 +47,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'job-history' %}">Job History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'absences' %}">Absences</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == logout_url %}active" aria-current="page{% endif %}"

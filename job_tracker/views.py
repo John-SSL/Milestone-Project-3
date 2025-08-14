@@ -105,3 +105,13 @@ def job_delete(request, pk):
         messages.add_message(request, messages.ERROR, "Error deleting job")
     
     return redirect('job-history')
+
+
+class AbsencesList(generic.ListView):
+    model = Absence
+    template_name = "job_tracker/absences.html"
+    paginate_by = 7
+
+    def get(self, request, *args, **kwargs):
+        self.absence_id = kwargs.get("absence_id")
+        return super().get(request, *args, **kwargs)
