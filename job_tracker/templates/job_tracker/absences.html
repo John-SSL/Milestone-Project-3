@@ -50,5 +50,23 @@
     {% endif %}
 </div>
 
+<!-- Absence Form -->
+<div class="container my-3">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <h3>Record Absence</h3>
+        </div>
+        <div class="col-8 text-center">
+            <form method="post" action="{% url 'absence-post'%}">
+                {% csrf_token %}
+                {{ absence_form | crispy }}
+                <button id="absencePostButton" type="submit" class="btn custom-button-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
+{% block extras %}
+<script src="{% static 'js/absences.js' %}"></script>
+{% endblock %}

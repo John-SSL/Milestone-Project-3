@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.db.models import Sum
 from django.views import generic
 from datetime import date, timedelta
-from .forms import CompletedJobForm
+from .forms import CompletedJobForm, AbsenceForm
 from .models import CompletedJob, Absence
 
 # Create your views here.
@@ -115,3 +115,22 @@ class AbsencesList(generic.ListView):
     def get(self, request, *args, **kwargs):
         self.absence_id = kwargs.get("absence_id")
         return super().get(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['absence_form'] = AbsenceForm()
+        return context
+
+
+def absence_post(request):
+    if request.method == "POST":
+        absence_form = AbsenceForm(request.POST)
+        if absence_form.is_valid():
+            form = absence_form.save(commit=False)
+            form.user = request.user
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'New absence submitted')
+        else:
+            messages.add_message(request, messages.ERROR, 'Error sumbitting absence')
+
+    return redirect('absences')

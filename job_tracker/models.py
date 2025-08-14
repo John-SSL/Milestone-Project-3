@@ -29,6 +29,9 @@ class Absence(models.Model):
     date = models.DateField()
     duration = models.DecimalField(max_digits=4, decimal_places=2)
 
+    class Meta:
+        ordering = ["-date"]
+
     def __str__(self):
         return f"{self.user} absent for {self.duration} hours on {self.date}"
 
